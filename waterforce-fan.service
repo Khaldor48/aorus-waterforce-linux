@@ -1,0 +1,17 @@
+[Unit]
+Description=Gigabyte Waterforce fan control (feed CPU temp to the cooler)
+After=multi-user.target
+
+[Service]
+Type=simple
+# root-owned copy: a root service must not run a user-writable script
+ExecStart=/usr/bin/python3 -I /usr/local/bin/waterforce.py daemon
+Restart=always
+RestartSec=2
+Nice=5
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+
+[Install]
+WantedBy=multi-user.target

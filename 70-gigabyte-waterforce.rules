@@ -1,0 +1,8 @@
+# Gigabyte AORUS Waterforce AIO (USB 1044:7a51) - allow non-root access for the logged-in user.
+# Install:  sudo cp 70-gigabyte-waterforce.rules /etc/udev/rules.d/
+#           sudo udevadm control --reload-rules && sudo udevadm trigger
+# After this you can run waterforce.py WITHOUT sudo (as the logged-in user).
+# Name must sort before 73-seat-late.rules, which turns the uaccess tag into an ACL.
+# usbfs node for pyusb: interface 2 has no kernel driver (bad HID descriptor), so no hidraw;
+# its feature reports go over EP0 control transfers.
+SUBSYSTEM=="usb", ATTR{idVendor}=="1044", ATTR{idProduct}=="7a51", TAG+="uaccess"
